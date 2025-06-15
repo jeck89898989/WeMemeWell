@@ -1,0 +1,184 @@
+/* Judging Section Components */
+.submission-item,
+.best-meme-item {
+    background: var(--gray-50);
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-4);
+    border: 2px solid var(--gray-200);
+    transition: all var(--transition-fast);
+    position: relative;
+}
+
+.submission-item:hover,
+.best-meme-item:hover {
+    background: var(--white);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.submission-text,
+.best-meme-text {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-4);
+    line-height: 1.6;
+    font-weight: var(--weight-medium);
+    color: var(--gray-800);
+}
+
+.best-meme-item.selected {
+    background: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+
+.best-meme-item.selected .best-meme-text {
+    color: var(--white);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Score Slider Components */
+.score-slider-container {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-3);
+    background: var(--white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--gray-200);
+}
+
+.score-slider-container label {
+    font-weight: var(--weight-semibold);
+    color: var(--gray-700);
+    min-width: 60px;
+    font-size: var(--text-sm);
+}
+
+.score-slider {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 8px;
+    border-radius: var(--radius-sm);
+    background: var(--gray-200);
+    outline: none;
+    transition: all var(--transition-fast);
+}
+
+.score-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary-gradient);
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-fast);
+}
+
+.score-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-lg);
+}
+
+.score-slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary-gradient);
+    cursor: pointer;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+.score-display {
+    font-weight: var(--weight-bold);
+    color: var(--primary-color);
+    min-width: 40px;
+    text-align: center;
+    font-size: var(--text-lg);
+    padding: var(--space-2) var(--space-3);
+    background: var(--white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--gray-200);
+}
+
+/* Score Circle Components */
+.score-circles-container {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    background: var(--white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--gray-200);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.score-circles-container label {
+    font-weight: var(--weight-semibold);
+    color: var(--gray-700);
+    min-width: 60px;
+    font-size: var(--text-sm);
+    margin-right: var(--space-2);
+}
+
+.score-circles {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+}
+
+.score-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--gray-300);
+    background: var(--white);
+    color: var(--gray-700);
+    font-weight: var(--weight-bold);
+    font-size: var(--text-base);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.score-circle:hover {
+    border-color: var(--primary-color);
+    background: var(--gray-50);
+    transform: scale(1.05);
+}
+
+.score-circle.selected {
+    background: var(--primary-gradient);
+    color: var(--white);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-md);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.score-circle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1), transparent);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.score-circle:hover::before {
+    opacity: 1;
+}

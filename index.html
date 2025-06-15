@@ -1,0 +1,364 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeMemeWell...</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="components.css">
+    <link rel="stylesheet" href="judging.css">
+    <link rel="stylesheet" href="results.css">
+    <link rel="stylesheet" href="buttons.css">
+    <link rel="stylesheet" href="typography.css">
+    <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+    <div id="app">
+        <!-- Lobby Screen -->
+        <div id="lobby-screen" class="screen active">
+            <div class="settings-container">
+                <button id="settings-btn" class="settings-btn" aria-label="Settings">
+                    ⚙️
+                </button>
+            </div>
+            
+            <div class="logo">
+                <h1 class="h1">NameMemeLater</h1>
+                <p class="text-xl">🎭</p>
+            </div>
+            
+            <div class="game-setup card">
+                <div class="input-group">
+                    <label for="num-players">👥 Number of Players (2-8)</label>
+                    <input type="number" id="num-players" min="2" max="8" value="3">
+                </div>
+                
+                <div class="input-group">
+                    <label for="game-mode">🎮 Game Mode</label>
+                    <select id="game-mode">
+                        <option value="rotating">🔄 Rotating Judge</option>
+                        <option value="fixed">📌 Fixed Judge</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="num-rounds">🎯 Number of Rounds</label>
+                    <select id="num-rounds">
+                        <option value="3">3 Rounds</option>
+                        <option value="5" selected>5 Rounds</option>
+                        <option value="7">7 Rounds</option>
+                        <option value="10">10 Rounds</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="scoring-method">🏆 Scoring Method</label>
+                    <select id="scoring-method">
+                        <option value="10" selected>⭐ 1-10 Points</option>
+                        <option value="5">🌟 1-5 Points</option>
+                        <option value="best">🏅 Best Meme Only</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="meme-pack">📦 Meme Pack</label>
+                    <select id="meme-pack">
+                        <option value="classic" selected>🎭 Classic Memes</option>
+                        <option value="trending">🔥 Trending Memes</option>
+                        <option value="animals">🐾 Animal Memes</option>
+                        <option value="reactions">😂 Reaction Memes</option>
+                        <option value="office">💼 Office/Work Memes</option>
+                        <option value="gaming">🎮 Gaming Memes</option>
+                    </select>
+                </div>
+                
+                <div id="player-names" class="player-names">
+                    <!-- Player name inputs will be generated here -->
+                </div>
+                
+                <div class="judge-selection" id="judge-selection" style="display: none;">
+                    <h4 class="h4">👑 Selected Judge: <span id="selected-judge-name">Player 1</span></h4>
+                </div>
+                
+                <button id="start-game" class="btn btn-primary">
+                    🚀 Start Game
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-header card">
+                <div class="round-info">
+                    <span id="round-counter">Round 1</span>
+                    <span id="judge-info">Judge: Player 1</span>
+                </div>
+                <div class="header-buttons">
+                    <button id="scores-btn" class="btn btn-secondary">Scores</button>
+                    <button id="exit-game-btn" class="btn btn-danger">Exit Game</button>
+                </div>
+            </div>
+
+            <!-- Meme Display -->
+            <div id="meme-container" class="meme-container card">
+                <img id="meme-image" src="" alt="Meme">
+                <video id="meme-video" style="display: none;" controls muted loop>
+                    <source src="" type="video/mp4">
+                </video>
+            </div>
+
+            <!-- Caption Selection (for non-judges) -->
+            <div id="caption-selection" class="caption-section card">
+                <h3 class="h3">Choose your caption:</h3>
+                <div id="caption-options" class="caption-options">
+                    <!-- Caption buttons will be generated here -->
+                </div>
+                <div class="status-message" id="status-message">Waiting for all players to submit...</div>
+            </div>
+
+            <!-- Judging Section (for judge) -->
+            <div id="judging-section" class="judging-section card" style="display: none;">
+                <h3 class="h3">Judge the captions:</h3>
+                <div id="submissions-to-judge" class="submissions">
+                    <!-- Submissions will be shown here -->
+                </div>
+                <button id="finish-judging" class="btn btn-success" style="display: none;">
+                    ✅ Finish Round
+                </button>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results-section" class="results-section card" style="display: none;">
+                <h3 class="h3">🎉 Round Results</h3>
+                <div id="round-results" class="round-results">
+                    <!-- Results will be shown here -->
+                </div>
+                <button id="next-round" class="btn btn-primary">Next Round ➡️</button>
+            </div>
+        </div>
+
+        <!-- Scores Screen -->
+        <div id="scores-screen" class="screen">
+            <div class="scores-header card">
+                <h2 class="h2">📊 Scoreboard</h2>
+                <button id="back-to-game" class="btn btn-secondary">← Back to Game</button>
+            </div>
+            <div id="scoreboard" class="scoreboard card">
+                <!-- Scores will be displayed here -->
+            </div>
+        </div>
+
+        <!-- Settings Screen -->
+        <div id="settings-screen" class="screen">
+            <div class="settings-header card">
+                <h2 class="h2">⚙️ Settings</h2>
+                <button id="close-settings" class="btn btn-secondary">← Back</button>
+            </div>
+            
+            <div class="settings-content">
+                <div class="settings-section card">
+                    <h3 class="h3">🎨 Color Themes</h3>
+                    <div class="theme-selector">
+                        <button class="theme-btn active" data-theme="default">
+                            <div class="theme-preview theme-default"></div>
+                            <span>Default</span>
+                        </button>
+                        <button class="theme-btn" data-theme="ocean">
+                            <div class="theme-preview theme-ocean"></div>
+                            <span>Ocean</span>
+                        </button>
+                        <button class="theme-btn" data-theme="sunset">
+                            <div class="theme-preview theme-sunset"></div>
+                            <span>Sunset</span>
+                        </button>
+                        <button class="theme-btn" data-theme="forest">
+                            <div class="theme-preview theme-forest"></div>
+                            <span>Forest</span>
+                        </button>
+                        <button class="theme-btn" data-theme="royal">
+                            <div class="theme-preview theme-royal"></div>
+                            <span>Royal</span>
+                        </button>
+                        <button class="theme-btn" data-theme="win30">
+                            <div class="theme-preview theme-win30"></div>
+                            <span>Windows 3.0</span>
+                        </button>
+                        <button class="theme-btn" data-theme="win98">
+                            <div class="theme-preview theme-win98"></div>
+                            <span>Windows 98</span>
+                        </button>
+                        <button class="theme-btn" data-theme="winxp">
+                            <div class="theme-preview theme-winxp"></div>
+                            <span>Windows XP</span>
+                        </button>
+                        <button class="theme-btn" data-theme="gameboy">
+                            <div class="theme-preview theme-gameboy"></div>
+                            <span>GameBoy</span>
+                        </button>
+                        <button class="theme-btn" data-theme="msdos">
+                            <div class="theme-preview theme-msdos"></div>
+                            <span>MS-DOS</span>
+                        </button>
+                        <button class="theme-btn" data-theme="nokia1100">
+                            <div class="theme-preview theme-nokia1100"></div>
+                            <span>Nokia 1100</span>
+                        </button>
+                        <button class="theme-btn" data-theme="nokia1110">
+                            <div class="theme-preview theme-nokia1110"></div>
+                            <span>Nokia 1110</span>
+                        </button>
+                        <button class="theme-btn" data-theme="iphone6">
+                            <div class="theme-preview theme-iphone6"></div>
+                            <span>iPhone 6</span>
+                        </button>
+                        <button class="theme-btn" data-theme="iphone6s">
+                            <div class="theme-preview theme-iphone6s"></div>
+                            <span>iPhone 6S</span>
+                        </button>
+                        <button class="theme-btn" data-theme="iphone7">
+                            <div class="theme-preview theme-iphone7"></div>
+                            <span>iPhone 7</span>
+                        </button>
+                        <button class="theme-btn" data-theme="iphonexr">
+                            <div class="theme-preview theme-iphonexr"></div>
+                            <span>iPhone XR</span>
+                        </button>
+                        <button class="theme-btn" data-theme="nokia3210">
+                            <div class="theme-preview theme-nokia3210"></div>
+                            <span>Nokia 3210</span>
+                        </button>
+                        <button class="theme-btn" data-theme="nokia1200">
+                            <div class="theme-preview theme-nokia1200"></div>
+                            <span>Nokia 1200</span>
+                        </button>
+                        <button class="theme-btn" data-theme="samsunge1100">
+                            <div class="theme-preview theme-samsunge1100"></div>
+                            <span>Samsung E1100</span>
+                        </button>
+                        <button class="theme-btn" data-theme="iphone5s">
+                            <div class="theme-preview theme-iphone5s"></div>
+                            <span>iPhone 5S</span>
+                        </button>
+                        <button class="theme-btn" data-theme="motorolarazrv3">
+                            <div class="theme-preview theme-motorolarazrv3"></div>
+                            <span>Motorola RAZR V3</span>
+                        </button>
+                        <button class="theme-btn" data-theme="iphone12">
+                            <div class="theme-preview theme-iphone12"></div>
+                            <span>iPhone 12 Pro</span>
+                        </button>
+                        <button class="theme-btn" data-theme="galaxys4">
+                            <div class="theme-preview theme-galaxys4"></div>
+                            <span>Galaxy S4</span>
+                        </button>
+                        <button class="theme-btn" data-theme="iphone11">
+                            <div class="theme-preview theme-iphone11"></div>
+                            <span>iPhone 11</span>
+                        </button>
+                        <button class="theme-btn" data-theme="galaxys3">
+                            <div class="theme-preview theme-galaxys3"></div>
+                            <span>Galaxy S III</span>
+                        </button>
+                        <button class="theme-btn" data-theme="nokia6600">
+                            <div class="theme-preview theme-nokia6600"></div>
+                            <span>Nokia 6600</span>
+                        </button>
+                        <button class="theme-btn" data-theme="iphonex">
+                            <div class="theme-preview theme-iphonex"></div>
+                            <span>iPhone X</span>
+                        </button>
+                        <button class="theme-btn" data-theme="galaxynote">
+                            <div class="theme-preview theme-galaxynote"></div>
+                            <span>Galaxy Note</span>
+                        </button>
+                        <button class="theme-btn" data-theme="blackberrybold">
+                            <div class="theme-preview theme-blackberrybold"></div>
+                            <span>BlackBerry Bold</span>
+                        </button>
+                        <button class="theme-btn" data-theme="htconem8">
+                            <div class="theme-preview theme-htconem8"></div>
+                            <span>HTC One M8</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="settings-section card">
+                    <h3 class="h3">🖼️ Meme Management</h3>
+                    <div class="content-management">
+                        <div class="download-section">
+                            <button id="download-all-memes-btn" class="btn btn-secondary">📁 Download All Memes</button>
+                            <p class="text-sm text-muted">Download all memes as individual image files</p>
+                        </div>
+                        
+                        <div class="add-item-form">
+                            <input type="url" id="new-meme-url" placeholder="Enter meme image URL..." />
+                            <input type="text" id="new-meme-alt" placeholder="Enter meme description..." />
+                            <select id="new-meme-pack">
+                                <option value="classic">Classic Memes</option>
+                                <option value="trending">Trending Memes</option>
+                                <option value="animals">Animal Memes</option>
+                                <option value="reactions">Reaction Memes</option>
+                                <option value="office">Office/Work Memes</option>
+                                <option value="gaming">Gaming Memes</option>
+                            </select>
+                            <button id="add-meme-btn" class="btn btn-primary">Add Meme</button>
+                        </div>
+                        <div class="upload-form">
+                            <input type="file" id="meme-file-input" accept="image/*,video/*" multiple />
+                            <input type="text" id="upload-meme-alt" placeholder="Enter description for uploaded files..." />
+                            <select id="upload-meme-pack">
+                                <option value="classic">Classic Memes</option>
+                                <option value="trending">Trending Memes</option>
+                                <option value="animals">Animal Memes</option>
+                                <option value="reactions">Reaction Memes</option>
+                                <option value="office">Office/Work Memes</option>
+                                <option value="gaming">Gaming Memes</option>
+                                <option value="local" selected>My Local Memes</option>
+                            </select>
+                            <button id="upload-meme-btn" class="btn btn-secondary">📁 Upload Local Files</button>
+                        </div>
+                        <div id="meme-list" class="content-list">
+                            <!-- Memes will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section card">
+                    <h3 class="h3">💬 Caption Management</h3>
+                    <div class="content-management">
+                        <div class="add-item-form">
+                            <input type="text" id="new-caption" placeholder="Enter new caption..." maxlength="100" />
+                            <button id="add-caption-btn" class="btn btn-primary">Add Caption</button>
+                        </div>
+                        <div id="caption-list" class="content-list">
+                            <!-- Captions will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.158.0/build/three.module.js"
+        }
+    }
+    </script>
+    <script src="game-state.js"></script>
+    <script src="meme-manager.js"></script>
+    <script src="meme-theme-manager.js"></script>
+    <script src="ui-state.js"></script>
+    <script src="ui-animations.js"></script>
+    <script src="ui-components.js"></script>
+    <script src="ui-events.js"></script>
+    <script src="ui-manager.js"></script>
+    <script src="player-manager.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

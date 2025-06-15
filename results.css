@@ -1,0 +1,130 @@
+/* Results and Scoring Components */
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-5);
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-3);
+    border-left: 4px solid var(--primary-color);
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.result-item:hover {
+    background: var(--white);
+    box-shadow: var(--shadow-md);
+    transform: translateX(4px);
+}
+
+.result-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--primary-gradient);
+}
+
+.result-player {
+    font-weight: var(--weight-bold);
+    color: var(--gray-800);
+    font-size: var(--text-lg);
+}
+
+.result-caption {
+    font-size: var(--text-base);
+    color: var(--gray-600);
+    margin: var(--space-2) 0;
+    flex: 1;
+    padding: 0 var(--space-4);
+    font-style: italic;
+}
+
+.result-score {
+    font-weight: var(--weight-bold);
+    color: var(--primary-color);
+    font-size: var(--text-xl);
+    padding: var(--space-2) var(--space-4);
+    background: var(--white);
+    border-radius: var(--radius-md);
+    border: 2px solid var(--primary-color);
+    min-width: 80px;
+    text-align: center;
+}
+
+/* Score Items */
+.score-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-5);
+    border-bottom: 1px solid var(--gray-100);
+    transition: all var(--transition-fast);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-2);
+}
+
+.score-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.score-item:hover {
+    background: var(--gray-50);
+}
+
+.score-item.winner {
+    background: var(--primary-gradient);
+    color: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.score-item.winner::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+    border-radius: var(--radius-lg);
+    z-index: -1;
+    animation: goldGlow 2s ease-in-out infinite alternate;
+}
+
+.player-name {
+    font-weight: var(--weight-bold);
+    font-size: var(--text-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.player-score {
+    font-weight: var(--weight-bold);
+    font-size: var(--text-xl);
+    color: var(--primary-color);
+    padding: var(--space-2) var(--space-3);
+    background: var(--white);
+    border-radius: var(--radius-md);
+    min-width: 80px;
+    text-align: center;
+}
+
+.score-item.winner .player-score {
+    color: var(--primary-color);
+    background: var(--white);
+    box-shadow: var(--shadow-md);
+}
+
+@keyframes goldGlow {
+    0% { opacity: 0.7; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.02); }
+}

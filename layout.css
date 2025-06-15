@@ -1,0 +1,117 @@
+/* Layout and Screen Management */
+.screen {
+    display: none;
+    min-height: 100vh;
+    padding: var(--space-5);
+    animation: slideInUp var(--transition-normal) ease-out;
+}
+
+.screen.active {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Lobby Screen */
+#lobby-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-8);
+}
+
+.logo h1 {
+    font-size: var(--text-5xl);
+    font-weight: var(--weight-bold);
+    color: var(--white);
+    margin-bottom: var(--space-3);
+    text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    letter-spacing: -0.02em;
+}
+
+.logo p {
+    font-size: var(--text-xl);
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 0;
+    font-weight: var(--weight-medium);
+}
+
+/* Game Screen Layout */
+#game-screen {
+    padding: var(--space-4);
+    gap: var(--space-5);
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--white);
+    padding: var(--space-5) var(--space-6);
+    border-radius: var(--radius-2xl);
+    margin-bottom: 0;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--gray-100);
+}
+
+.round-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.round-info span:first-child {
+    font-weight: var(--weight-bold);
+    color: var(--gray-900);
+    font-size: var(--text-lg);
+}
+
+#judge-info {
+    font-size: var(--text-sm);
+    color: var(--primary-dark);
+    font-weight: var(--weight-medium);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+#judge-info::before {
+    content: '⚖️';
+    font-size: var(--text-base);
+}
+
+.header-buttons {
+    display: flex;
+    gap: var(--space-3);
+}
+
+/* Scores Screen Layout */
+#scores-screen {
+    padding: var(--space-5);
+    gap: var(--space-5);
+}
+
+.scores-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--white);
+    padding: var(--space-5) var(--space-6);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--gray-100);
+}
+
+.scores-header h2 {
+    color: var(--gray-800);
+    margin: 0;
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-bold);
+}
+
+.scoreboard {
+    background: var(--white);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--gray-100);
+}
